@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Heinz Solutions — Elite close protection, OPSEC consulting, OSINT intelligence and worldwide logistics. Security made in Germany."/>
+  <title>Heinz Solutions — Security &amp; Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    /* ===================== RESET & BASE ===================== */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0a0a0a;
+      color: #e8e4de;
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===================== CSS VARIABLES ===================== */
+    :root {
+      --gold: #b8965a;
+      --gold-light: #d4ae72;
+      --bg: #0a0a0a;
+      --bg2: #0e0e0e;
+      --bg3: #131310;
+      --border: rgba(255,255,255,0.08);
+      --text-muted: #777;
+      --text-dim: #555;
+    }
+
+    /* ===================== UTILITY ===================== */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ===================== NAVIGATION ===================== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 62px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    .nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 21px; letter-spacing: 2.5px; color: #fff;
+      white-space: nowrap;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex; gap: 2.2rem; align-items: center;
+    }
+    .nav-links a {
+      font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase;
+      color: #888; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    .nav-cta {
+      background: var(--gold); color: #000; border: none;
+      padding: 9px 22px; font-size: 11px; letter-spacing: 1.5px;
+      text-transform: uppercase; font-weight: 500;
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+      white-space: nowrap; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 1.5px; background: #fff;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* mobile drawer */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; top: 62px;
+      background: rgba(10,10,10,0.98); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+      color: #aaa; padding: 0.5rem 0; transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: #fff; }
+    .mobile-menu .m-cta {
+      background: var(--gold); color: #000; padding: 12px 32px;
+      font-weight: 500; font-size: 12px; letter-spacing: 1.5px;
+    }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 2.5rem 5rem;
+      overflow: hidden;
+    }
+    /* grid overlay */
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(184,150,90,0.06) 80px),
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(184,150,90,0.06) 80px);
+      pointer-events: none;
+    }
+    /* gradient bg */
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(60,40,10,0.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+
+    .eyebrow {
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .eyebrow::before {
+      content: ''; display: inline-block;
+      width: 30px; height: 1px; background: var(--gold); flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 11vw, 110px);
+      line-height: 0.92; letter-spacing: 2px; color: #fff;
+      margin-bottom: 1.6rem;
+    }
+    .hero-title em { font-style: normal; color: var(--gold); }
+
+    .hero-sub {
+      font-size: 16px; font-weight: 300; color: #999;
+      max-width: 480px; margin-bottom: 2.5rem; line-height: 1.75;
+    }
+
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold); color: #000; border: none;
+      padding: 14px 32px; font-size: 12px; letter-spacing: 1.5px;
+      text-transform: uppercase; font-weight: 500;
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+      transition: background 0.2s; white-space: nowrap;
+    }
+    .btn-primary:hover { background: var(--gold-light); }
+
+    .btn-ghost {
+      display: inline-block;
+      background: transparent; color: #e8e4de;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 14px 32px; font-size: 12px; letter-spacing: 1.5px;
+      text-transform: uppercase; font-weight: 500;
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s; white-space: nowrap;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-badge {
+      position: absolute; right: 2.5rem; bottom: 3rem; z-index: 2;
+      text-align: right;
+    }
+    .hero-badge-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px; line-height: 1;
+      color: rgba(184,150,90,0.12); letter-spacing: 2px;
+    }
+    .hero-badge-label {
+      font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: #444;
+    }
+
+    /* ===================== TRUST BAR ===================== */
+    .trust-bar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem; overflow: hidden;
+    }
+    .trust-bar-inner {
+      display: flex; gap: 2.5rem; align-items: center;
+      padding: 1.1rem 0; flex-wrap: wrap;
+    }
+    .trust-item {
+      font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: #555; display: flex; align-items: center; gap: 9px;
+      white-space: nowrap;
+    }
+    .dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+    /* ===================== SERVICES ===================== */
+    .section { padding: 6rem 0; }
+    .section-label {
+      font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(38px, 5vw, 58px);
+      letter-spacing: 1.5px; color: #fff;
+      margin-bottom: 3rem; line-height: 1.0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .service-card {
+      background: var(--bg2);
+      padding: 2.5rem 2rem 2.2rem;
+      transition: background 0.25s;
+    }
+    .service-card:hover { background: #181510; }
+    .service-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 44px; color: rgba(184,150,90,0.18);
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .service-line { width: 22px; height: 1px; background: var(--gold); margin-bottom: 0.9rem; }
+    .service-title {
+      font-size: 13px; font-weight: 500; letter-spacing: 1.2px;
+      text-transform: uppercase; color: #fff; margin-bottom: 0.7rem;
+    }
+    .service-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+    /* ===================== ABOUT / STATS ===================== */
+    .about { background: #0d0d0a; border-top: 1px solid rgba(184,150,90,0.12); border-bottom: 1px solid rgba(184,150,90,0.12); padding: 5rem 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .stat-card { text-align: center; padding: 1.5rem 0; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 60px; color: var(--gold); line-height: 1;
+    }
+    .stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-top: 4px; }
+    .about-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 3.5vw, 40px);
+      letter-spacing: 1px; color: #fff; margin-bottom: 1rem; line-height: 1.05;
+    }
+    .about-body { font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.75; }
+
+    /* ===================== REGIONS ===================== */
+    .regions { padding: 5rem 0; background: var(--bg); }
+    .region-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+    .pill {
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 7px 16px; font-size: 11.5px; letter-spacing: 1px;
+      color: #777; text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .pill:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ===================== CONTACT ===================== */
+    .contact-section { background: var(--bg2); border-top: 1px solid var(--border); padding: 6rem 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(34px, 4vw, 52px);
+      letter-spacing: 1px; color: #fff; margin-bottom: 1rem; line-height: 1.05;
+    }
+    .contact-body { font-size: 14px; color: var(--text-muted); font-weight: 300; max-width: 380px; line-height: 1.75; }
+
+    /* email row */
+    .email-row {
+      width: 100%; display: flex; align-items: center; gap: 14px;
+      background: #131310; border: 1px solid rgba(184,150,90,0.2);
+      padding: 1rem 1.2rem; cursor: pointer;
+      transition: border-color 0.2s; text-align: left;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .email-row:hover { border-color: var(--gold); }
+    .email-icon {
+      width: 38px; height: 38px; background: rgba(184,150,90,0.1);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .email-info { flex: 1; }
+    .email-label { font-size: 9.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); }
+    .email-value { font-size: 14px; color: #e8e4de; }
+    .copy-icon { flex-shrink: 0; opacity: 0.4; }
+
+    .copied-toast {
+      font-size: 10.5px; color: var(--gold); letter-spacing: 1.5px;
+      text-transform: uppercase; height: 20px; margin-top: 6px;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .copied-toast.show { opacity: 1; }
+
+    /* messaging buttons */
+    .msg-btns { display: flex; gap: 10px; margin-top: 1rem; }
+    .msg-btn {
+      flex: 1; padding: 15px 10px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      transition: opacity 0.2s; border: none; cursor: pointer;
+    }
+    .msg-btn:hover { opacity: 0.88; }
+    .wa  { background: #25D366; color: #000; }
+    .tg  { background: #0088cc; color: #fff; }
+
+    .contact-note {
+      font-size: 11.5px; color: #444; margin-top: 1.25rem;
+      font-style: italic; letter-spacing: 0.3px;
+    }
+
+    /* ===================== FOOTER ===================== */
+    .footer {
+      background: #080808;
+      border-top: 1px solid var(--border);
+      padding: 1.6rem 2.5rem;
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; letter-spacing: 2px; color: #333;
+    }
+    .footer-logo span { color: #5a3e1b; }
+    .footer-copy { font-size: 11px; color: #333; }
+    .footer-tagline { font-size: 11px; color: #333; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { padding: 100px 1.5rem 4rem; }
+      .hero-badge { display: none; }
+      .hero-title { font-size: clamp(56px, 14vw, 82px); }
+
+      .trust-bar { padding: 0 1.5rem; }
+      .trust-bar-inner { gap: 1.2rem; }
+
+      .services-grid { grid-template-columns: 1fr 1fr; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    @media (max-width: 560px) {
+      .nav { padding: 0 1.25rem; }
+      .hero { padding: 90px 1.25rem 3.5rem; }
+      .container { padding: 0 1.25rem; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+
+      .hero-title { font-size: clamp(50px, 16vw, 72px); }
+      .hero-sub { font-size: 15px; }
+
+      .trust-bar-inner { gap: 0.9rem; }
+      .trust-item { font-size: 10px; }
+
+      .msg-btns { flex-direction: column; }
+      .msg-btn { padding: 14px; }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ======================================================
+     NAVIGATION
+====================================================== -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">HEINZ<span>.</span>SOLUTIONS</a>
+
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#regions">Regions</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <a href="#contact" class="nav-cta btn-primary" style="padding:9px 22px;font-size:11px;">Request Briefing</a>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#regions" class="mobile-link">Regions</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="#contact" class="m-cta">Request Briefing</a>
+</div>
+
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <div class="eyebrow">Security &amp; Logistics — Made in Germany</div>
+    <h1 class="hero-title">
+      PROTECT<br>WHAT<br><em>MATTERS.</em>
+    </h1>
+    <p class="hero-sub">
+      Elite close protection, OPSEC consulting, OSINT intelligence,
+      and worldwide logistics — delivered by veterans of special forces
+      and law enforcement.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Request Consultation</a>
+      <a href="#services" class="btn-ghost">View Services</a>
+    </div>
+  </div>
+  <div class="hero-badge">
+    <div class="hero-badge-num">20+</div>
+    <div class="hero-badge-label">Years in the field</div>
+  </div>
+</section>
+
+
+<!-- ======================================================
+     TRUST BAR
+====================================================== -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><span class="dot"></span>Former Special Forces Personnel</div>
+    <div class="trust-item"><span class="dot"></span>Worldwide Operations</div>
+    <div class="trust-item"><span class="dot"></span>Verified HNWI References</div>
+    <div class="trust-item"><span class="dot"></span>Full OPSEC Compliant</div>
+    <div class="trust-item"><span class="dot"></span>24/7 Response</div>
+  </div>
+</div>
+
+
+<!-- ======================================================
+     SERVICES
+====================================================== -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-label">Our Services</div>
+    <h2 class="section-title">WHAT WE DELIVER</h2>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-line"></div>
+        <div class="service-title">Close Protection</div>
+        <p class="service-desc">Highly trained personnel from special military and police units. Residential security teams, risk minimization, and discreet 24/7 protection worldwide.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-line"></div>
+        <div class="service-title">OPSEC Consulting</div>
+        <p class="service-desc">Operational security planning and implementation. We protect confidential information and activities through strict need-to-know protocols.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-line"></div>
+        <div class="service-title">OSINT &amp; Intelligence</div>
+        <p class="service-desc">Background checks, partner vetting, communication security, privacy resets, alias identities, and full digital threat analysis.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-line"></div>
+        <div class="service-title">Safe Haven</div>
+        <p class="service-desc">Guarded residences across Europe and South America for individuals under immediate threat. Discreet, off-record long-term placements available.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <div class="service-line"></div>
+        <div class="service-title">Worldwide Logistics</div>
+        <p class="service-desc">Executive transport across Europe, Africa, South America, and high-risk zones. Trusted vehicle and driver networks available on short notice.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <div class="service-line"></div>
+        <div class="service-title">Tax &amp; Residency Strategy</div>
+        <p class="service-desc">0% income tax structures, offshore accounts, privacy-state LLCs, and residency relocation to tax-favourable jurisdictions.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================================================
+     ABOUT / STATS
+====================================================== -->
+<section class="about" id="about">
+  <div class="container about-grid">
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">40+</div>
+        <div class="stat-label">Countries Operated</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Discretion Record</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">On-Call Response</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">DE</div>
+        <div class="stat-label">German Standards</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Who We Are</div>
+      <h2 class="about-title">BUILT ON MILITARY DISCIPLINE</h2>
+      <p class="about-body">
+        Our team comes from the highest levels of German special operations and law
+        enforcement. We bring that same discipline, precision, and unwavering commitment
+        to every client engagement — whether a single consultation or a multi-year
+        protective detail.
+      </p>
+      <p class="about-body" style="margin-top:1rem;">
+        Heinz Solutions operates with full OPSEC compliance. References from
+        high-net-worth and high-profile clients are available on request.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ======================================================
+     REGIONS
+====================================================== -->
+<section class="regions" id="regions">
+  <div class="container">
+    <div class="section-label">Global Network</div>
+    <h2 class="section-title" style="font-size:clamp(30px,4vw,44px);margin-bottom:0.75rem;">ACTIVE PARTNER REGIONS</h2>
+    <div class="region-pills">
+      <span class="pill">Germany</span>
+      <span class="pill">Europe</span>
+      <span class="pill">United Kingdom</span>
+      <span class="pill">Afghanistan</span>
+      <span class="pill">Iraq</span>
+      <span class="pill">South America</span>
+      <span class="pill">Africa</span>
+      <span class="pill">São Paulo</span>
+      <span class="pill">Mexico City</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================================================
+     CONTACT
+====================================================== -->
+<section class="contact-section" id="contact">
+  <div class="container contact-grid">
+
+    <div>
+      <div class="section-label">Get In Touch</div>
+      <h2 class="contact-title">REACH OUT —<br>DISCREETLY.</h2>
+      <p class="contact-body">
+        All inquiries are treated with full confidentiality. Choose your preferred
+        secure channel. No forms. No tracking. No data stored.
+      </p>
+    </div>
+
+    <div>
+      <!-- EMAIL COPY ROW -->
+      <!-- ⚠️  Replace info@heinzsolutions.com with the real email in TWO places below -->
+      <button class="email-row" id="emailBtn" aria-label="Copy email address">
+        <div class="email-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b8965a" stroke-width="1.5">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m2 7 10 7 10-7"/>
+          </svg>
+        </div>
+        <div class="email-info">
+          <div class="email-label">Email — click to copy</div>
+          <div class="email-value" id="emailAddr">info@heinzsolutions.com</div>
+        </div>
+        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5">
+          <rect x="9" y="9" width="13" height="13" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      </button>
+      <div class="copied-toast" id="copiedToast">Copied to clipboard ✓</div>
+
+      <!-- MESSAGING BUTTONS -->
+      <!-- ⚠️  Replace +49XXXXXXXXXX with the real WhatsApp number (no spaces, with country code) -->
+      <!-- ⚠️  Replace heinzsolutions with the real Telegram username -->
+      <div class="msg-btns">
+        <a class="msg-btn wa" href="https://wa.me/49XXXXXXXXXX" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.107 1.524 5.831L.061 23.5l5.84-1.45A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.007-1.37l-.36-.213-3.724.975.996-3.62-.234-.372A9.817 9.817 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+          </svg>
+          WhatsApp
+        </a>
+        <a class="msg-btn tg" href="https://t.me/heinzsolutions" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+          Telegram
+        </a>
+      </div>
+
+      <p class="contact-note">Signal available on request. All communications encrypted end-to-end.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">HEINZ<span>.</span>SOLUTIONS</div>
+    <div class="footer-copy">© 2025 Heinz Solutions — Germany</div>
+    <div class="footer-tagline">Discretion Guaranteed</div>
+  </div>
+</footer>
+
+
+<!-- ======================================================
+     JAVASCRIPT
+====================================================== -->
+<script>
+  /* ---- Sticky nav shadow ---- */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* ---- Hamburger / mobile menu ---- */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+
+  /* Close mobile menu on link click */
+  document.querySelectorAll('.mobile-link, .m-cta').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ---- Email copy-to-clipboard ---- */
+  const emailBtn   = document.getElementById('emailBtn');
+  const emailAddr  = document.getElementById('emailAddr');
+  const copiedToast = document.getElementById('copiedToast');
+
+  emailBtn.addEventListener('click', () => {
+    const email = emailAddr.textContent.trim();
+    navigator.clipboard.writeText(email).then(() => {
+      copiedToast.classList.add('show');
+      setTimeout(() => copiedToast.classList.remove('show'), 2500);
+    }).catch(() => {
+      /* fallback for older browsers */
+      const ta = document.createElement('textarea');
+      ta.value = email; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      copiedToast.classList.add('show');
+      setTimeout(() => copiedToast.classList.remove('show'), 2500);
+    });
+  });
+
+  /* ---- Subtle fade-in on scroll ---- */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .stat-card, .pill').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
